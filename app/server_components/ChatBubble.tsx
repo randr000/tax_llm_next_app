@@ -1,15 +1,21 @@
 import React from 'react';
-import { FC } from 'react';
 
-interface cbProps {
+interface ChatBubbleProps {
     start?: boolean,
     text: string
 }
 
-const ChatBubble: FC<cbProps> = ({start=true, text=""}) => {
+const ChatBubble = ({start=true, text=""}: ChatBubbleProps) => {
   return (
-    <div className={`chat chat-${start ? 'start' : 'end'} m${start ? 'r' : 'l'}-auto flex ${!start && "flex-row-reverse"}`}>
-        <div className={`chat-image avatar m${start ? 'l' : 'r'}-auto flex-initial`}>
+    <div className={`
+        chat chat-${start ? 'start' : 'end'}
+        m${start ? 'r' : 'l'}-auto
+        m${start ? 'l' : 'r'}-5
+        mt-2
+        flex
+        ${!start && "flex-row-reverse"}
+    `}>
+        <div className={`chat-image avatar m${start ? 'l' : 'r'}-auto flex-initial`} >
             <div className="w-10 rounded-full">
             <img
                 alt="Tailwind CSS chat bubble component"
