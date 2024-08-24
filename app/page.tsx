@@ -1,7 +1,11 @@
-import Image from "next/image";
+import Navbar from "./server_components/Navbar";
+import Chatbot from "./server_components/Chatbot";
 
 export default function Home() {
   return (
-    <main><h1>hello</h1></main>
+    <main>
+      <Navbar/>
+      <Chatbot/>
+    </main>
   );
 }
