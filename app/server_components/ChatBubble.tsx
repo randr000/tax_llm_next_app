@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ChatBubbleProps {
-    start?: boolean,
+    start: boolean,
     text: string
 }
 

@@ -2,14 +2,24 @@
 import React, { useState } from 'react';
 import SendIcon from '../server_components/icons/SendIcon';
 
-const QueryInput = () => {
+const QueryInput = ({setChatBubbles}: {setChatBubbles: Function}) => {
+
+    interface ChatBubbleProps {
+        start: boolean,
+        text: string
+    }
 
     const [query, setQuery] = useState('');
 
     function handleOnClick() {
         if (query) {
-            alert('working');
-            console.log(query);
+            // send query to api
+
+            // show user chat bubble with user query
+            setChatBubbles((prev: ChatBubbleProps[]) => [...prev, {start: false, text: query}]);
+
+            // reset query
+            setQuery('');
         }
     }
 
