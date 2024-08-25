@@ -19,10 +19,6 @@ const QueryContainer = () => {
         max-lg:min-h-[15vh]
         `}>
         <div className="flex min-[400px]:max-lg:flex-wrap justify-center md:justify-between p-1">
-            {/* <div className="flex">
-                <input type="text" placeholder="Type query" className="input input-bordered input-md min-w-[45vw] max-w-[55vw]"/>
-                <button className="btn btn-active font-bold text-4xl"><SendIcon/></button>
-            </div> */}
             <QueryInput/>
             <div className="flex">
                 <button className="btn btn-active font-bold text-4xl max-[486px]:mx-7 mx-1 md:mx-3"><CorrectIcon/></button>
