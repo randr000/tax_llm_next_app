@@ -25,7 +25,10 @@ const ChatBubble = ({start=true, text=""}: ChatBubbleProps) => {
                 src={`${start ? botImg : userImg}`} />
             </div>
         </div>
-        <div className={`chat-bubble flex-initial ${start ? 'bg-slate-400 text-black' : 'bg-slate-800'}`}>{text}</div>
+        <div
+            className={`chat-bubble flex-initial ${start ? 'bg-slate-400 text-black' : 'bg-slate-800'}`}>
+                {start && !text ? <span className="loading loading-dots loading-md"></span> : text}
+        </div>
     </div>
   );
 }
