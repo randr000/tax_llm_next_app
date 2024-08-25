@@ -23,6 +23,10 @@ const QueryInput = ({setChatBubbles}: {setChatBubbles: Function}) => {
         }
     }
 
+    function handleOnKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') handleOnClick();
+    }
+
   return (
     <div className="flex">
         <input
@@ -31,6 +35,7 @@ const QueryInput = ({setChatBubbles}: {setChatBubbles: Function}) => {
             className="input input-bordered input-md min-w-[45vw] max-w-[55vw] text-black"
             value={query}
             onChange={e => setQuery(e.target.value)}
+            onKeyDown={handleOnKeyDown}
         />
         <button className="btn btn-active font-bold text-4xl" onClick={handleOnClick}><SendIcon/></button>
     </div>
