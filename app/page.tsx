@@ -5,7 +5,7 @@ import QueryContainer from "./server_components/QueryContainer";
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-slate-300 py-0">
       <Navbar/>
       <BodyContainer>
         <Chatbot/>

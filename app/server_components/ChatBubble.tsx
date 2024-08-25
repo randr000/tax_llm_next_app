@@ -5,6 +5,9 @@ interface ChatBubbleProps {
     text: string
 }
 
+const userImg = 'https://cdn-icons-png.flaticon.com/512/747/747376.png';
+const botImg = 'https://cdn-icons-png.flaticon.com/512/4711/4711987.png';
+
 const ChatBubble = ({start=true, text=""}: ChatBubbleProps) => {
   return (
     <div className={`
@@ -18,11 +21,11 @@ const ChatBubble = ({start=true, text=""}: ChatBubbleProps) => {
         <div className={`chat-image avatar m${start ? 'l' : 'r'}-auto flex-initial`} >
             <div className="w-10 rounded-full">
             <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                alt={`${start ? 'Image of Bot' : 'Image of User'}`}
+                src={`${start ? botImg : userImg}`} />
             </div>
         </div>
-        <div className="chat-bubble flex-initial">{text}</div>
+        <div className={`chat-bubble flex-initial ${start ? 'bg-slate-400 text-black' : 'bg-slate-800'}`}>{text}</div>
     </div>
   );
 }
