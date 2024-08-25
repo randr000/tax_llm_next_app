@@ -1,16 +1,14 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import ChatbotContext from '../context/ChatbotContext';
+import CHATBOT_ACTION_TYPES from '../action-types/chatbotActionTypes';
 import SendIcon from '../server_components/icons/SendIcon';
 
-const QueryInput = ({setChatBubbles}: {setChatBubbles: Function}) => {
-
-    interface ChatBubbleProps {
-        start: boolean,
-        text: string
-    }
+const QueryInput = () => {
 
     const [query, setQuery] = useState('');
     const [isFetchingBotResponse, setIsFetchingBotResponse] = useState(false);
+    const {dispatch} = useContext(ChatbotContext);
 
     useEffect(() => {
         if (!isFetchingBotResponse) return;
@@ -23,13 +21,13 @@ const QueryInput = ({setChatBubbles}: {setChatBubbles: Function}) => {
             body: JSON.stringify({query: query})
         })
         .then(res => res.json())
-        .then(json => setChatBubbles((prev: ChatBubbleProps[]) => {
-            console.log(json.response)
-            prev[prev.length - 1] = json.response;
-            setChatBubbles(prev);
+        .then(json => {
+            dispatch({type: CHATBOT_ACTION_TYPES.UPDATE_BOT_MESSAGE, payload: json.response});
             setQuery('');
-            setIsFetchingBotResponse(false);
-        }));
+            setIsFetchingBotResponse(false)
+        })
+        .catch(error => console.log(error));
+        
         
     }, [isFetchingBotResponse]);
 
@@ -39,8 +37,7 @@ const QueryInput = ({setChatBubbles}: {setChatBubbles: Function}) => {
 
 
             // show user chat bubble with user query
-            setChatBubbles((prev: ChatBubbleProps[]) => [...prev, {start: false, text: query}, {start: true, text: ""}]);
-
+            dispatch({type: CHATBOT_ACTION_TYPES.ADD_CHAT_MESSAGE, payload: {start: false, text: query}});
             // reset query
             // setQuery('');
 
