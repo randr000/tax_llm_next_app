@@ -22,24 +22,19 @@ const QueryInput = () => {
         })
         .then(res => res.json())
         .then(json => {
+            // updates last chatbot message text property with bot's response
             dispatch({type: CHATBOT_ACTION_TYPES.UPDATE_BOT_MESSAGE, payload: json.response});
             setQuery('');
             setIsFetchingBotResponse(false)
         })
         .catch(error => console.log(error));
         
-        
     }, [isFetchingBotResponse]);
 
     function handleOnClick() {
         if (query) {
-            // send query to api
-
-
-            // show user chat bubble with user query
+            // show user chat bubble with user query and pending bot response
             dispatch({type: CHATBOT_ACTION_TYPES.ADD_CHAT_MESSAGE, payload: {start: false, text: query}});
-            // reset query
-            // setQuery('');
 
             // set fetiching response
             setIsFetchingBotResponse(true);

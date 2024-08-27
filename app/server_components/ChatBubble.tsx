@@ -1,14 +1,10 @@
 import React from 'react';
-
-interface ChatBubbleProps {
-    start: boolean,
-    text: string
-}
+import { ChatBubbleProps } from '../types/types';
 
 const userImg = 'https://cdn-icons-png.flaticon.com/512/747/747376.png';
 const botImg = 'https://cdn-icons-png.flaticon.com/512/4711/4711987.png';
 
-const ChatBubble = ({start=true, text=""}: ChatBubbleProps) => {
+const ChatBubble = ({start=true, text="", html}: ChatBubbleProps) => {
   return (
     <div className={`
         chat chat-${start ? 'start' : 'end'}
@@ -27,7 +23,7 @@ const ChatBubble = ({start=true, text=""}: ChatBubbleProps) => {
         </div>
         <div
             className={`chat-bubble flex-initial ${start ? 'bg-slate-400 text-black' : 'bg-slate-800'}`}>
-                {start && !text ? <span className="loading loading-dots loading-md"></span> : text}
+                {start && !text && !html ? <span className="loading loading-dots loading-md"></span> : html ? html : text}
         </div>
     </div>
   );

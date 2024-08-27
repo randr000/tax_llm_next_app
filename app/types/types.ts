@@ -2,11 +2,18 @@ import React from "react"
 
 export interface ChatBubbleProps {
     start: boolean,
-    text: string
+    text?: string,
+    html?: React.ReactNode
 };
 
+export interface QueryRatingButtonProps {
+    icon?: React.ReactElement,
+    ratingValue?: "correct" | "partial" | "incorrect"
+}
+
 export interface ChatbotState {
-    chatHistory: ChatBubbleProps[]
+    chatHistory: ChatBubbleProps[],
+    queryRatingBtnDisabledStatus: boolean
 };
 
 export interface Action {
