@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useReducer } from 'react';
-import ChatbotHistory from '../server_components/ChatbotHistory';
-import QueryContainer from '../server_components/QueryContainer';
+import ChatbotHistory from './ChatbotHistory';
+import QueryContainer from './QueryContainer';
 import { CHATBOT_INITIAL_STATE, chatbotReducer } from '../reducers/chatbotReducer';
 import ChatbotContext from '../context/ChatbotContext';
 

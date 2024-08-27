@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ChatbotContext from '../context/ChatbotContext';
 import CHATBOT_ACTION_TYPES from '../action-types/chatbotActionTypes';
-import SendIcon from '../server_components/icons/SendIcon';
+import SendIcon from './icons/SendIcon';
 
 const QueryInput = () => {
 
