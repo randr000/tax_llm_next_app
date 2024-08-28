@@ -3,23 +3,28 @@ import React, { useState, useEffect, useContext } from 'react';
 import ChatbotContext from '../context/ChatbotContext';
 import CHATBOT_ACTION_TYPES from '../action-types/chatbotActionTypes';
 import SendIcon from './icons/SendIcon';
+import { PostRequestPayload } from '../types/types';
+import sendRating from '../sendRating';
 
 const QueryInput = () => {
 
     const [query, setQuery] = useState('');
     const [isFetchingBotResponse, setIsFetchingBotResponse] = useState(false);
-    const {dispatch} = useContext(ChatbotContext);
+    const {chatbotState, dispatch} = useContext(ChatbotContext);
+    const {chatHistory, queryRatingBtnDisabledStatus} = chatbotState;
 
     useEffect(() => {
         if (!isFetchingBotResponse) return;
 
-        fetch("http://localhost:8000/query", {
+        const postReqPayload: PostRequestPayload = {
             headers: {
                 "Content-Type": "application/json"
             },
             method: "POST",
             body: JSON.stringify({query: query})
-        })
+        };
+
+        fetch("http://localhost:8000/query", postReqPayload)
         .then(res => res.json())
         .then(json => {
             // updates last chatbot message text property with bot's response
@@ -33,6 +38,15 @@ const QueryInput = () => {
 
     function handleOnClick() {
         if (query) {
+
+            // if user never rating response, send user query and bot reponse to database
+            if (!queryRatingBtnDisabledStatus) {
+                sendRating({
+                    userMsg: chatHistory[chatHistory.length - 2].text || '',
+                    botMsg: chatHistory[chatHistory.length - 1].text || '',
+                    ratingValue: undefined
+                });
+            }
             // show user chat bubble with user query and pending bot response
             dispatch({type: CHATBOT_ACTION_TYPES.ADD_CHAT_MESSAGE, payload: {start: false, text: query}});
 

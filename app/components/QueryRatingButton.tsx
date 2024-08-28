@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import ChatbotContext from '../context/ChatbotContext';
 import CHATBOT_ACTION_TYPES from '../action-types/chatbotActionTypes';
 import { QueryRatingButtonProps } from '../types/types';
+import sendRating from '../sendRating';
 
 const QueryRatingButton = ({icon, ratingValue}: QueryRatingButtonProps) => {
 
@@ -15,8 +16,12 @@ const QueryRatingButton = ({icon, ratingValue}: QueryRatingButtonProps) => {
             payload: true
         });
 
-        // fetch to send rating to mysql
-        console.log()
+        // send rating to db
+        sendRating({
+          userMsg: chatHistory[chatHistory.length - 2].text || '',
+          botMsg: chatHistory[chatHistory.length - 1].text || '',
+          ratingValue: ratingValue
+        });
     }
 
   return (

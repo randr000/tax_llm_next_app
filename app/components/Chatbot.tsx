@@ -7,7 +7,6 @@ import ChatbotContext from '../context/ChatbotContext';
 
 const Chatbot = () => {
 
-    const [chatBubbles, setChatBubbles] = useState([]);
     const [chatbotState, dispatch] = useReducer(chatbotReducer, CHATBOT_INITIAL_STATE);
 
   return (
