@@ -37,7 +37,7 @@ const QueryInput = () => {
     }, [isFetchingBotResponse]);
 
     function handleOnClick() {
-        if (query) {
+        if (query && !isFetchingBotResponse) {
 
             // if user never rating response, send user query and bot reponse to database
             if (!queryRatingBtnDisabledStatus) {
