@@ -24,7 +24,7 @@ const QueryInput = () => {
             body: JSON.stringify({query: query})
         };
 
-        fetch("http://localhost:8000/query", postReqPayload)
+        fetch(`http://${process.env.NEXT_PUBLIC_FASTAPI_QDRANT_REQUESTS_HOST}:8000/query`, postReqPayload)
         .then(res => res.json())
         .then(json => {
             // updates last chatbot message text property with bot's response
