@@ -11,7 +11,7 @@ const QueryInput = () => {
     const [query, setQuery] = useState('');
     const [isFetchingBotResponse, setIsFetchingBotResponse] = useState(false);
     const {chatbotState, dispatch} = useContext(ChatbotContext);
-    const {chatHistory, queryRatingBtnDisabledStatus} = chatbotState;
+    const {chatHistory, queryRatingBtnDisabledStatus, ratingHash} = chatbotState;
 
     useEffect(() => {
         if (!isFetchingBotResponse) return;
@@ -24,11 +24,11 @@ const QueryInput = () => {
             body: JSON.stringify({query: query})
         };
 
-        fetch(`http://${process.env.NEXT_PUBLIC_FASTAPI_QDRANT_REQUESTS_HOST}:8000/query`, postReqPayload)
+        fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/query`, postReqPayload)
         .then(res => res.json())
         .then(json => {
             // updates last chatbot message text property with bot's response
-            dispatch({type: CHATBOT_ACTION_TYPES.UPDATE_BOT_MESSAGE, payload: json.response});
+            dispatch({type: CHATBOT_ACTION_TYPES.UPDATE_BOT_MESSAGE, payload: {botResponse: json.botResponse, ratingHash: json.hashKey}});
             setQuery('');
             setIsFetchingBotResponse(false)
         })
@@ -42,6 +42,7 @@ const QueryInput = () => {
             // if user never rating response, send user query and bot reponse to database
             if (!queryRatingBtnDisabledStatus) {
                 sendRating({
+                    hashKey: ratingHash,
                     userMsg: chatHistory[chatHistory.length - 2].text || '',
                     botMsg: chatHistory[chatHistory.length - 1].text || '',
                     ratingValue: undefined

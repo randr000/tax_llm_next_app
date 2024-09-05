@@ -15,7 +15,8 @@ export interface QueryRatingButtonProps {
 
 export interface ChatbotState {
     chatHistory: ChatBubbleProps[],
-    queryRatingBtnDisabledStatus: boolean
+    queryRatingBtnDisabledStatus: boolean,
+    ratingHash: string
 };
 
 export interface Action {
@@ -29,6 +30,7 @@ export interface ChatbotContextProviderValue {
 };
 
 export interface SendRating {
+    hashKey: string,
     userMsg: string,
     botMsg: string,
     ratingValue?: ratingValue

@@ -8,7 +8,7 @@ import sendRating from '../sendRating';
 const QueryRatingButton = ({icon, ratingValue}: QueryRatingButtonProps) => {
 
     const {chatbotState, dispatch} = useContext(ChatbotContext);
-    const {chatHistory, queryRatingBtnDisabledStatus} = chatbotState;
+    const {chatHistory, queryRatingBtnDisabledStatus, ratingHash} = chatbotState;
 
     function handleOnClick() {
         dispatch({
@@ -18,6 +18,7 @@ const QueryRatingButton = ({icon, ratingValue}: QueryRatingButtonProps) => {
 
         // send rating to db
         sendRating({
+          hashKey: ratingHash,
           userMsg: chatHistory[chatHistory.length - 2].text || '',
           botMsg: chatHistory[chatHistory.length - 1].text || '',
           ratingValue: ratingValue

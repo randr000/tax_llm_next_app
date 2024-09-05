@@ -16,7 +16,9 @@ async function sendRating(rating: SendRating): Promise<any> {
     };
 
     try {
-        fetch(`http://${process.env.NEXT_PUBLIC_NODE_DB_HOST}:8100/rating`, postReqPayload);
+        fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/rating`, postReqPayload)
+        .then(res => res.json())
+        .then(json => console.log(json.msg));
     } catch (error) {
         console.log(error);
     }
