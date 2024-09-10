@@ -1,3 +1,7 @@
+# Tax RAG App
+
+### A chat application that uses RAG (Retrieval Augmented Generation) to query the 2023 IRS [Publication 17](https://www.irs.gov/pub/irs-pdf/p17.pdf) to answer tax questions a user may have.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
